@@ -1,0 +1,65 @@
+{{ 'simple-image-text.css' | asset_url | stylesheet_tag }}
+
+
+
+
+
+<section class="simple-image-text">
+  <div class="sit-container">
+    
+    {% if section.settings.image != blank %}
+      <div class="sit-image">
+        <img
+  src="{{ section.settings.image | image_url: width: 800 }}"
+  alt="{{ section.settings.heading | escape }}"
+  loading="lazy"
+  width="{{ section.settings.image.width }}"
+  height="{{ section.settings.image.height }}"
+  sizes="(max-width: 768px) 100vw, 500px"
+>
+
+      </div>
+    {% endif %}
+
+    <div class="sit-content">
+      {% if section.settings.heading != blank %}
+        <h2>{{ section.settings.heading }}</h2>
+      {% endif %}
+
+      {% if section.settings.text != blank %}
+        <p>{{ section.settings.text }}</p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Simple Image with Text",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your heading here"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Write your description text here."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Simple Image with Text"
+    }
+  ]
+}
+{% endschema %}
